@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Link to jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Link to Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- Link to Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+
+
+</head>
+
+<body>
+
+    <!-- Jumbotron for Title -->
+    <div class="jumbotron border-bottom border-dark">
+        <h1 class="text-center">Employee Data Management</h1>
+        <h2 class="text-center">A Comprehensive Directory of Employee Billable Hours</h2>
+    </div>
+
+    <!-- Bootstrap Container -->
+    <div class="container">
+        <div class="row border border-dark">
+            <table id="emp-table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Rate</th>
+                    </tr>
+                </thead>
+                <tbody id="emp-table-body">
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="col-5 border border-dark">
+            <h2>Add Employee</h2>
+            <form>
+                <div class="form-group">
+                    <label for="InputName">Employee Name</label>
+                    <input type="text" class="form-control" id="InputName" placeholder="Enter Name">
+                </div>
+                <div class="form-group">
+                    <label for="InputRole">Role</label>
+                    <input type="text" class="form-control" id="InputRole" placeholder="Enter Role">
+                </div>
+                <div class="form-group">
+                    <label for="InputStartDate">Start Date (DD/MM/YY - ex: 02/28/18)</label>
+                    <input type="text" class="form-control" id="InputStart" placeholder="Enter Start Date">
+                </div>
+                <div class="form-group">
+                    <label for="InputRate">Monthly Rate</label>
+                    <input type="text" class="form-control" id="InputRate" placeholder="Enter Rate">
+                </div>
+                <button id="submit-emp-btn" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- End Container-->
+
+  <!-- Link to JavaScript -->
+  <script src="app.js"></script>
+</body>
+
+</html>
