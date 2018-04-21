@@ -17,6 +17,9 @@
     <!-- Link to Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 
+    <!-- Link to Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
 
 </head>
 
@@ -37,7 +40,9 @@
                         <th scope="col">Name</th>
                         <th scope="col">Role</th>
                         <th scope="col">Start</th>
+                        <th scope="col">Months</th>
                         <th scope="col">Rate</th>
+                        <th scope="col">$YTD</th>
                     </tr>
                 </thead>
                 <tbody id="emp-table-body">
@@ -57,7 +62,7 @@
                     <input type="text" class="form-control" id="InputRole" placeholder="Enter Role">
                 </div>
                 <div class="form-group">
-                    <label for="InputStartDate">Start Date (DD/MM/YY - ex: 02/28/18)</label>
+                    <label for="InputStartDate">Start Date (DD/MM/YY - ex: 28/02/18)</label>
                     <input type="text" class="form-control" id="InputStart" placeholder="Enter Start Date">
                 </div>
                 <div class="form-group">

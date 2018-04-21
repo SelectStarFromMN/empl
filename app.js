@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 
-// Whenever a user clicks the submit-bid button
+// Whenever a user clicks the submit Add Employee button
 $("#submit-emp-btn").on("click", function (event) {
     // Prevent form from submitting
     event.preventDefault();
@@ -23,41 +23,41 @@ $("#submit-emp-btn").on("click", function (event) {
     // Get the input values
     var empName = $("#InputName").val().trim();
     var empRole = $("#InputRole").val().trim();
-    var empStart = $("#InputStart").val().trim();
+    var empStart = parseInt(moment($("#InputStart").val().trim(), "DD/MM/YY").format("x"));
     var empRate = $("#InputRate").val().trim();
 
-    // console.log("bidder: " + newBidder + " bidprice:" + bidderPrice);
-
-
-    // Log the Bidder and Price (Even if not the highest)
-
-    // Save the new price in Firebase
-    // Note how we are using the Firebase .set() method
+    // Save the new Employee in Firebase
+    // Note how we are using the Firebase .push() method
     database.ref().push({
         empName: empName,
         empRole: empRole,
         empStart: empStart,
         empRate: empRate
     });
+
+    // Clear text boxes
+    $("#InputName").val("");
+    $("#InputRole").val("");
+    $("#InputStart").val("");
+    $("#InputRate").val("");
+    $("#InputName").focus();
 })
 
 // At the initial load and subsequent value changes, get a snapshot of the stored data.
 // This function allows you to update your page in real-time when the firebase database changes.
-database.ref().on("child_added", function(snapshot, prevChildKey) {
-    var newEmp = snapshot.val();
-    console.log(prevChildKey);
-    console.log("Name: " + newEmp.empName);
-    console.log("Role: " + newEmp.empRole);
-    console.log("Start: " + newEmp.empStart);
-    console.log("Rate: " + newEmp.empRate);
-
-    $("#emp-table-body").append(`<tr><td>${newEmp.empName}</td><td>${newEmp.empRole}</td><td>${newEmp.empStart}</td><td>${newEmp.empRate}</td></tr>`)
+database.ref().on("child_added", function(snapshot) {
+    var empRec = snapshot.val();
+    var empStart = moment(empRec.empStart).format("DD/MM/YY");
+    var empMonths = moment().diff(empRec.empStart, 'months');
+    
+    // Table Columns: <id=pkey hidden>, Name, Role, Start, Months(computed), Rate, YTD(computed)
+    $("#emp-table-body").append(`<tr id="${snapshot.key}"><td>${empRec.empName}</td><td>${empRec.empRole}</td><td>${empStart}</td><td>${empMonths}</td><td>${empRec.empRate}</td><td>${empRec.empRate * empMonths}</td></tr>`)
 })
 
-database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
-    // Change the HTML to reflect
-    $("#name-display").text(snapshot.val().name);
-    $("#email-display").text(snapshot.val().email);
-    $("#age-display").text(snapshot.val().age);
-    $("#comment-display").text(snapshot.val().comment);
-  });
+// database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+//     // Change the HTML to reflect
+//     $("#name-display").text(snapshot.val().name);
+//     $("#email-display").text(snapshot.val().email);
+//     $("#age-display").text(snapshot.val().age);
+//     $("#comment-display").text(snapshot.val().comment);
+//   });
